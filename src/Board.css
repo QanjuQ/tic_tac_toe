@@ -1,0 +1,14 @@
+.board{
+    margin-top: 100px;    
+    align-self: center;
+}
+
+.row{
+    display: flex;
+}
+
+.square{
+    font-size: 30px;
+    width: 100px;
+    height: 100px;
+}
