@@ -11,6 +11,34 @@ function Square(props){
         )
 };
 
+const getSymbol = function(xIsNext) {
+   const symbolsBasedOnX = {true:'X',false: 'O'};
+   return symbolsBasedOnX[xIsNext]; 
+}
+
+const isSubset = (list,sublist)=>(sublist.every((ele)=>(list.includes(ele))));
+
+const hasCurrPlayerWon = function(moves,currPlayer) {
+    const currPlayerMoves = moves.filter((move)=>(move===currPlayer));
+    const winningPositions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  console.log(winningPositions.some(
+      (winningPosition)=>isSubset(currPlayerMoves,winningPosition)
+    ));
+  return winningPositions.some(
+      (winningPosition)=>isSubset(currPlayerMoves,winningPosition)
+    );
+};
+
+const isGameDraw = (moves) => (!moves.includes(null));
 
 class Board extends Component {
     constructor(props){
@@ -23,7 +51,7 @@ class Board extends Component {
 
     handleClick(index) {
         const squares = this.state.squares.slice();
-        squares[index] = this.state.xIsNext? 'X':'O';
+        squares[index] = getSymbol(this.state.xIsNext);
         this.setState({
             squares: squares,
             xIsNext: !this.state.xIsNext,
@@ -37,7 +65,13 @@ class Board extends Component {
     }
 
     render(){
-        const status = 'Player: X';
+        const currPlayer = getSymbol(this.state.xIsNext);
+        let status = 'Next Player: ' + currPlayer;
+        if(hasCurrPlayerWon(this.state.squares,currPlayer.slice())) {
+            status = "Winner :" + currPlayer;
+        }else if(isGameDraw(this.state.squares)) {
+            status = "Game Draw";
+        }
         return (
             <div className = "board">
             <div className="status">{status}</div>
@@ -68,10 +102,7 @@ class Game extends Component {
     render() {
         return (
             <div className="game">
-            <div className="game-board">
-                <Board/>
-            </div>
-            <div>Status</div>
+                <Board/>            
             </div>
         );
     }
