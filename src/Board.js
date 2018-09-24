@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import './Board.css';
 
-function Square(props){
-    return (
-        <button 
-        className="square" id={props.id} 
-        onClick={props.onClick}>
-        {props.value}
-        </button>
-        )
-};
+class Square extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {value : ''};
+    }
+
+    render() {
+        return (
+            <button className = "square" id = {this.props.id}
+            onClick={this.props.onClick}>
+            {this.props.value}
+            </button>
+        );
+    }
+}
 
 const getSymbol = function(xIsNext) {
    const symbolsBasedOnX = {true:'X',false: 'O'};
@@ -19,7 +25,8 @@ const getSymbol = function(xIsNext) {
 const isSubset = (list,sublist)=>(sublist.every((ele)=>(list.includes(ele))));
 
 const hasCurrPlayerWon = function(moves,currPlayer) {
-    const currPlayerMoves = moves.filter((move)=>(move===currPlayer));
+    const currPlayerMoves =  moves.reduce((array, element, index) => 
+        (element === currPlayer) ? array.concat(index) : array, []);
     const winningPositions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -30,10 +37,7 @@ const hasCurrPlayerWon = function(moves,currPlayer) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  console.log(winningPositions.some(
-      (winningPosition)=>isSubset(currPlayerMoves,winningPosition)
-    ));
-  return winningPositions.some(
+  return winningPositions.filter(
       (winningPosition)=>isSubset(currPlayerMoves,winningPosition)
     );
 };
@@ -59,16 +63,17 @@ class Board extends Component {
     }
 
     renderSquare(index) {
-        return <Square 
+        return <Square
         value={this.state.squares[index]}
         onClick= {()=> this.handleClick(index)} id={index}></Square>;
     }
 
     render(){
-        const currPlayer = getSymbol(this.state.xIsNext);
-        let status = 'Next Player: ' + currPlayer;
-        if(hasCurrPlayerWon(this.state.squares,currPlayer.slice())) {
-            status = "Winner :" + currPlayer;
+        const currPlayer = getSymbol(!this.state.xIsNext);
+        let status = 'Next Player: ' + getSymbol(this.state.xIsNext);
+        let winningMove = hasCurrPlayerWon(this.state.squares,currPlayer.slice());
+        if(winningMove.length) {
+            status = "Winner :" + getSymbol(!this.state.xIsNext);
         }else if(isGameDraw(this.state.squares)) {
             status = "Game Draw";
         }
@@ -96,9 +101,6 @@ class Board extends Component {
 }
 
 class Game extends Component {
-    constructor() {
-        super();
-    }
     render() {
         return (
             <div className="game">
