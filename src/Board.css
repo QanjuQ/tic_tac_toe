@@ -1,14 +1,37 @@
 .board{
-    margin-top: 100px;    
-    align-self: center;
+    margin: 50px auto;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 525px;
 }
 
-.row{
-    display: flex;
+#sq0{
+    border-top-left-radius: 15px;
+}
+
+#sq2{
+    border-top-right-radius: 15px;
+}
+
+#sq8{
+    border-bottom-right-radius: 15px;
+}
+
+#sq6{
+    border-bottom-left-radius: 15px;
 }
 
 .square{
-    font-size: 30px;
-    width: 100px;
-    height: 100px;
+    background: #1e1e1e;
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+  display: flex;
+    justify-content: center;
+  font-size: 125px;
+  padding-top: 8px;
+  color: #f94e3f;
 }

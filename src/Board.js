@@ -4,21 +4,19 @@ import './Board.css';
 class Square extends Component{
     constructor(props) {
         super(props);
-        this.state = {value : ''};
     }
-
     render() {
         return (
-            <button className = "square" id = {this.props.id}
+            <div className = "square" id = {this.props.id}
             onClick={this.props.onClick}>
             {this.props.value}
-            </button>
+            </div>
         );
     }
 }
 
 const getSymbol = function(xIsNext) {
-   const symbolsBasedOnX = {true:'X',false: 'O'};
+   const symbolsBasedOnX = {true:'x',false: 'o'};
    return symbolsBasedOnX[xIsNext]; 
 }
 
@@ -49,12 +47,15 @@ class Board extends Component {
         super(props)
         this.state = {
             squares : Array(9).fill(null),
-            xIsNext : true
+            xIsNext : true,
         };
     }
 
     handleClick(index) {
         const squares = this.state.squares.slice();
+        if(squares[index]){
+            return;
+        }
         squares[index] = getSymbol(this.state.xIsNext);
         this.setState({
             squares: squares,
@@ -64,8 +65,9 @@ class Board extends Component {
 
     renderSquare(index) {
         return <Square
+        key = {index}
         value={this.state.squares[index]}
-        onClick= {()=> this.handleClick(index)} id={index}></Square>;
+        onClick= {()=> this.handleClick(index)} id={"sq"+index}></Square>;
     }
 
     render(){
@@ -78,22 +80,10 @@ class Board extends Component {
             status = "Game Draw";
         }
         return (
-            <div className = "board">
-            <div className="status">{status}</div>
-                <div className= "row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className= "row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className= "row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
+            <div>
+                <div> Status: {status}</div>
+                <div className = "board">
+                {[0,1,2,3,4,5,6,7,8].map(this.renderSquare.bind(this))}
                 </div>
             </div>
         )
