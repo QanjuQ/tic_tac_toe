@@ -25,13 +25,21 @@
 }
 
 .square{
+    align-items: center;
     background: #1e1e1e;
-  width: 150px;
-  height: 150px;
-  margin: 5px;
-  display: flex;
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+    display: flex;
+    text-align: center;
     justify-content: center;
-  font-size: 125px;
-  padding-top: 8px;
-  color: #f94e3f;
+    font-size: 125px;
+    padding-top: 0;
+    color: #f94e3f;
+}
+
+.game-status{
+    color: darkcyan;
+    font-size: 30px;
+    margin:50px auto;
 }

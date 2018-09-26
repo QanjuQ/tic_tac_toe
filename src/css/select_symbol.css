@@ -1,0 +1,55 @@
+body{
+  background: #07324B;
+  font-family: 'Baloo bhai',cursive; 
+  text-align: center; 
+}
+
+.select-player {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 30, 30, 0.95);
+  color: #FFFFF2;
+  font-size: 45px;
+}
+
+.select-player p {
+  margin-bottom: -15px;
+  margin-top: 105px;
+  color: #f94e3f;
+  font-size: 65px;
+}
+
+.select-player .symbols{
+  margin:10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-player .symbols .symbol{
+  height: 175px;
+  width: 175px;
+  align-items: center;
+  color: #1e1e1e;
+  background:#07324B;
+  display: flex;
+  border: none;
+  justify-content: center;
+  border-radius: 15px;
+  color: #1e1e1e;
+  width: 175px;
+  height: 165px;
+  font-size: 175px;
+  margin: 25px;
+  padding-top: 10px;
+}
+
+.select-player .symbols .symbol:hover {
+  color: #f94e3f;
+  background: #0a3c64;
+  cursor: pointer;
+}

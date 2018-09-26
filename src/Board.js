@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import './Board.css';
 
 class Square extends Component{
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div className = "square" id = {this.props.id}
@@ -85,7 +82,7 @@ class Board extends Component {
     render(){
         return (
             <div>
-                <div> {this.state.state}</div>
+                <div className="game-status"> {this.state.state}</div>
                 <div className = "board">
                 {[0,1,2,3,4,5,6,7,8].map(this.renderSquare.bind(this))}
                 </div>
