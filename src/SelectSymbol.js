@@ -16,7 +16,7 @@ class SelectSymbol extends Component {
 
   handleClick(symbol) {
     const symbols = {x:'o',o:'x'};
-    const selectedSymbols = {user:symbol,computer:symbols[symbols]};
+    const selectedSymbols = {user:symbol,computer:symbols[symbol]};
     this.props.selectPlayer(selectedSymbols);
   }
 }
