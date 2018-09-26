@@ -38,6 +38,11 @@
     color: #f94e3f;
 }
 
+.square:hover {
+    cursor: pointer;
+    background: #282828;
+}
+
 .game-status{
     color: darkcyan;
     font-size: 30px;

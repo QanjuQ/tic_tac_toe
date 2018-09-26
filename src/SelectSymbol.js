@@ -7,15 +7,15 @@ class SelectSymbol extends Component {
       <div className= "select-player">
         <p className ="message">Choose your symbol:</p>
         <div className = "symbols">
-          <div className = "symbol" onClick={()=>this.handleClick('x')}>x</div>
-          <div className = "symbol" onClick={()=>this.handleClick('o')}>o</div>
+          <div className = "symbol" onClick={()=>this.handleClick('X')}>x</div>
+          <div className = "symbol" onClick={()=>this.handleClick('O')}>o</div>
         </div>
       </div>
     )
   }
 
   handleClick(symbol) {
-    const symbols = {x:'o',o:'x'};
+    const symbols = {X:'O',O:'X'};
     const selectedSymbols = {user:symbol,computer:symbols[symbol]};
     this.props.selectPlayer(selectedSymbols);
   }
