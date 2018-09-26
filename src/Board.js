@@ -48,40 +48,44 @@ class Board extends Component {
         this.state = {
             squares : Array(9).fill(null),
             xIsNext : true,
+            state : "x's Turn"
         };
     }
 
     handleClick(index) {
-        const squares = this.state.squares.slice();
+        const squares = this.state.squares;
         if(squares[index]){
             return;
+        }
+        const currPlayer = getSymbol(!this.state.xIsNext);
+        let winningMove = hasCurrPlayerWon(squares,currPlayer);
+        if(winningMove.length) {
+            this.setState({state:"Winner:" + currPlayer});
+            return;
+        }else if(isGameDraw(this.state.squares)) {
+            this.setState({state:"Game Draw"})
         }
         squares[index] = getSymbol(this.state.xIsNext);
         this.setState({
             squares: squares,
             xIsNext: !this.state.xIsNext,
+            state: currPlayer + "'s Turn"
         });
     }
 
     renderSquare(index) {
+        const isGameNotOver = this.state.state.match(/Turn/);
+        const onClick = isGameNotOver?()=> this.handleClick(index):null;
         return <Square
         key = {index}
         value={this.state.squares[index]}
-        onClick= {()=> this.handleClick(index)} id={"sq"+index}></Square>;
+        onClick= {onClick} id={"sq"+index}></Square>;
     }
 
     render(){
-        const currPlayer = getSymbol(!this.state.xIsNext);
-        let status = 'Next Player: ' + getSymbol(this.state.xIsNext);
-        let winningMove = hasCurrPlayerWon(this.state.squares,currPlayer.slice());
-        if(winningMove.length) {
-            status = "Winner :" + getSymbol(!this.state.xIsNext);
-        }else if(isGameDraw(this.state.squares)) {
-            status = "Game Draw";
-        }
         return (
             <div>
-                <div> Status: {status}</div>
+                <div> {this.state.state}</div>
                 <div className = "board">
                 {[0,1,2,3,4,5,6,7,8].map(this.renderSquare.bind(this))}
                 </div>
