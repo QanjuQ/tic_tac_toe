@@ -50,7 +50,7 @@ class Board extends Component {
         super(props)
         this.state = {
             squares : Array(9).fill(null),
-            state : ''
+            state : null
         };
     }
 
@@ -58,15 +58,18 @@ class Board extends Component {
         const moves = getIndicesOf(squares,symbol);
         if(hasPlayerWon(moves)){
             this.setState({
-                state:"Winner: " + symbol,
+                state:symbol===this.props.user?"You Win":"You Lost!",
                 squares:squares,
             });
+            setTimeout(()=>this.props.onGameOver(this.state.state),500);
             return true;
         }
         if(isGameDraw(squares)) {
             this.setState({
                 state:"Game Drawn" ,
+                squares:squares,
             });
+            setTimeout(()=>this.props.onGameOver(this.state.state),500);
             return true;
         }
     }
@@ -77,7 +80,7 @@ class Board extends Component {
             return;
         }
         squares[index] = this.props.user;
-        if(this.isGameOver(squares,this.props.user)) return;
+        this.isGameOver(squares,this.props.user)
         squares[getBotsMove(squares)] = this.props.computer; 
         this.isGameOver(squares,this.props.computer);
         this.setState({squares: squares});
