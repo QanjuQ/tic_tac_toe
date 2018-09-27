@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './css/App.css';
+import './App.css';
 import Board from '../board/board';
-import SelectSymbol from '../../SelectSymbol';
-import GameEnd from '../../game_end';
+import SelectSymbol from '../select-symbol/select-symbol';
+import GameEnd from '../game-end/game-end';
 
 class App extends Component {
   constructor(props) {

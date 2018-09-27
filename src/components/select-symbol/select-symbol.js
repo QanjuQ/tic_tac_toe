@@ -1,4 +1,4 @@
-import "./css/select_symbol.css";
+import "./select-symbol.css";
 import React, { Component } from 'react';
 
 class SelectSymbol extends Component {

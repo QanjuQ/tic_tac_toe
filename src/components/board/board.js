@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './board.css';
-import Square from './square/square.js';
+import Square from '../square/square';
 
 const isSubset = (list,sublist)=>(sublist.every((ele)=>(list.includes(ele))));
 

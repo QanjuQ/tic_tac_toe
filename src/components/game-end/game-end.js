@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/game_end.css';
+import './game-end.css';
 
 class GameEnd extends Component {
   render() {
