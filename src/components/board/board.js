@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Board.css';
-
+import './board.css';
+import Square from './square/square.js';
 
 const isSubset = (list,sublist)=>(sublist.every((ele)=>(list.includes(ele))));
 
@@ -33,18 +33,6 @@ const getBotsMove = (boardState) => {
     const emptySquares = getIndicesOf(boardState, null);
     return emptySquares[ generateNumberLessThan(emptySquares.length) ];
 };
-    
-class Square extends Component{
-    render() {
-        return (
-            <div className = "square" id = {this.props.id}
-            onClick={this.props.onClick}>
-            {this.props.value}
-            </div>
-        );
-    }
-}
-
 class Board extends Component {
     constructor(props){
         super(props)
@@ -75,10 +63,10 @@ class Board extends Component {
     }
 
     handleClick(index) {
-        const squares = this.state.squares.slice();
-        if(squares[index]){
+        if(this.state.squares[index]){
             return;
         }
+        const squares = this.state.squares.slice();
         squares[index] = this.props.user;
         this.isGameOver(squares,this.props.user)
         squares[getBotsMove(squares)] = this.props.computer; 

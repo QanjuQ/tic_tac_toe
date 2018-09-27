@@ -1,13 +1,3 @@
-.board{
-    margin: 50px auto;
-    display: flex;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    width: 525px;
-}
-
 #sq0{
     border-top-left-radius: 15px;
 }
@@ -41,10 +31,4 @@
 .square:hover {
     cursor: pointer;
     background: #282828;
-}
-
-.game-status{
-    color: darkcyan;
-    font-size: 30px;
-    margin:50px auto;
 }
