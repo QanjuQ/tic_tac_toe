@@ -61,7 +61,7 @@ class Board extends Component {
                 state:symbol===this.props.user?"You Win":"You Lost!",
                 squares:squares,
             });
-            setTimeout(()=>this.props.onGameOver(this.state.state),500);
+            setTimeout(()=>this.props.onGameOver(this.state.state),1000);
             return true;
         }
         if(isGameDraw(squares)) {
@@ -69,7 +69,7 @@ class Board extends Component {
                 state:"Game Drawn" ,
                 squares:squares,
             });
-            setTimeout(()=>this.props.onGameOver(this.state.state),500);
+            setTimeout(()=>this.props.onGameOver(this.state.state),1000);
             return true;
         }
     }
